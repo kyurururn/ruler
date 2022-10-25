@@ -64,6 +64,8 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
     let width_mm = mm * Math.cos(theta);
     let height_mm = mm * Math.sin(theta);
 
+    alert(width_mm)
+
     let ruler = document.getElementById("ruler")
     ruler.style.height = height_px / height_mm * 160 + "px";
     ruler.style.width = width_px / width_mm * 20 + "px";
