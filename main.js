@@ -108,7 +108,6 @@ interact(".over").draggable({
         move(event){
             pos.x += event.dx;
             pos.y += event.dy;
-            console.log(pos.x)
             ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + angle + "deg)";
         }
     }
@@ -118,6 +117,8 @@ interact(".over").gesturable({
     listeners:{
         move(event){
             angle += event.da;
+            pos.x += event.dx;
+            pos.y += event.dy;
             ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + angle + "deg)";
         }
     }
