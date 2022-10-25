@@ -1,3 +1,8 @@
+let body = document.querySelector("body");
+
+body.style.top = "0px";
+body.classList.add("no_scroll");
+
 let iphone_wh = {"3g"      :[3.5,320,480],
                  "3gs"     :[3.5,320,480],
                  "4"       :[3.5,320,480],
