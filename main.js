@@ -115,10 +115,15 @@ let pos = {x:0,y:0};
 let angle = 0;
 
 const ang = (b) => {
-    if(-2.5 <= b % 90 && b % 90 <= 2.5){
-        return b - b % 2.5;
+    let bb = b % 360;
+    if(bb < 0){
+        bb += 360;
+    }
+
+    if(bb % 90 <= 5 || bb % 90 >= 85){
+        return bb - bb % 90;
     }else{
-        return b;
+        return bb;
     }
 }
 
