@@ -93,8 +93,7 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
             let num = document.createElement("div");
             num.setAttribute("id","num");
             num.setAttribute("style","top:" + (height_px_per_mm * i + height_px_per_mm * 5 - 9) + "px; left:45px");
-            let txt = document.createTextNode(String(scale_lim / 10 - i / 10));
-            num.appendChild(txt)
+            num.innerHTML = String(scale_lim / 10 - i / 10);
             ruler.appendChild(num);
 
         }else{
