@@ -64,13 +64,15 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
     let width_mm = mm * Math.cos(theta);
     let height_mm = mm * Math.sin(theta);
 
-    alert(width_mm)
+    let height_px_per_mm = height_px / height_mm;
+    let width_px_per_mm  = width_px / width_mm;
+    let scale_lim = Math.floor(screen_h / height_px_per_mm / 10) * 10 - 10;
 
-    let ruler = document.getElementById("ruler")
-    ruler.style.height = height_px / height_mm * 160 + "px";
-    ruler.style.width = width_px / width_mm * 20 + "px";
-    
-    for(let i = 0; i < 151; ++i){
+    let ruler = document.getElementById("ruler");
+    ruler.style.height = height_px_per_mm * (scale_lim + 10) + "px";
+    ruler.style.width = 75 + "px";
+
+    for(let i = 0; i < scale_lim + 1; ++i){
         let scale = document.createElement("div");
         scale.setAttribute("id","scale");
         if(i % 10 == 0){
@@ -78,15 +80,9 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
         }else{
             scale.setAttribute("id","scale");
         }
-        scale.setAttribute("style","top:" + height_px / height_mm * i + "px");
+        scale.setAttribute("style","top:" + (height_px / height_mm * i + height_px / height_mm * 5) + "px");
         ruler.appendChild(scale);
     }
-
-    // height_px / height_mm * 10 + "px";
-    // width_px / width_mm * 10 + "px";
-
-
-
 }else{
     alert("iPhoneからアクセスしてください。")
 }
