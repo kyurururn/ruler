@@ -89,10 +89,18 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
         scale.setAttribute("id","scale");
         if(i % 10 == 0){
             scale.setAttribute("id","scale_over");
+
+            let num = document.createElement("div");
+            num.setAttribute("id","num");
+            num.setAttribute("style","top:" + (height_px_per_mm * i + height_px_per_mm * 5 - 9) + "px; left:45px");
+            let txt = document.createTextNode(String(scale_lim / 10 - i / 10));
+            num.appendChild(txt)
+            ruler.appendChild(num);
+
         }else{
             scale.setAttribute("id","scale");
         }
-        scale.setAttribute("style","top:" + (height_px / height_mm * i + height_px / height_mm * 5) + "px");
+        scale.setAttribute("style","top:" + (height_px_per_mm * i + height_px_per_mm * 5) + "px");
         ruler.appendChild(scale);
     }
 }else{
