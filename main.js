@@ -49,6 +49,8 @@ let iphone_wh = {"3g"      :[3.5,320,480],
                  "msi"     :[14 ,1280,720]}
 
 let ruler = document.getElementById("ruler");
+let ruler_height;
+let ruler_width;
 
 if(navigator.userAgent.indexOf("iPhone") > 0 || true){
     let screen_w = window.screen.width;
@@ -81,7 +83,9 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
     let width_px_per_mm  = width_px / width_mm;
     let scale_lim = Math.floor(window.innerHeight / height_px_per_mm / 10) * 10 - 10;
 
+    ruler_height = height_px_per_mm * (scale_lim + 10);
     ruler.style.height = height_px_per_mm * (scale_lim + 10) + "px";
+    ruler_width = 75;
     ruler.style.width = 75 + "px";
 
     for(let i = 0; i < scale_lim + 1; ++i){
@@ -138,5 +142,20 @@ interact(".over").gesturable({
             ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
         }
     }
-})
+});
 
+const left = () => {
+    pos.x = 0;
+    pos.y = (window.innerHeight - ruler_height) / 2;
+    angle = 0;
+    ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
+}
+
+const right = () => {
+    pos.x = window.innerWidth - ruler_width;
+    pos.y = (window.innerHeight - ruler_height) / 2;
+    angle = 180;
+    ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
+}
+
+left();
