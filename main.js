@@ -106,10 +106,7 @@ interact(".over").draggable({
             ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + angle + "deg)";
         }
     }
-});
-
-/*
-interact(".over").gesturable({
+}).gesturable({
     listeners:{
         move(event){
             angle += event.da;
@@ -117,5 +114,4 @@ interact(".over").gesturable({
         }
     }
 })
-*/
 
