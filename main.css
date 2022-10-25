@@ -48,3 +48,13 @@
     transform:rotate(-90deg);
     font-family:'Quicksand', sans-serif;
 }
+
+.menu{
+    height:10vh;
+    width:100vw;
+    background-color:black;
+    position:fixed;
+    z-index:100;
+    opacity:0.3;
+    bottom:0;
+}

@@ -110,12 +110,21 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
 let pos = {x:0,y:0};
 let angle = 0;
 
+const ang = (b) => {
+    if(-2.5 <= b % 90 && b % 90 <= 2.5){
+        return b - b % 2.5;
+    }else{
+        return b;
+    }
+}
+
+
 interact(".over").draggable({
     listeners:{
         move(event){
             pos.x += event.dx;
             pos.y += event.dy;
-            ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + angle + "deg)";
+            ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
         }
     }
 });
@@ -126,7 +135,7 @@ interact(".over").gesturable({
             angle += event.da;
             pos.x += event.dx;
             pos.y += event.dy;
-            ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + angle + "deg)";
+            ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
         }
     }
 })
