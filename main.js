@@ -37,6 +37,8 @@ let iphone_wh = {"3g"      :[3.5,320,480],
                  "14promax":[6.7,428,928],
                  "msi"     :[14 ,1280,720]}
 
+let ruler = document.getElementById("ruler");
+
 if(navigator.userAgent.indexOf("iPhone") > 0 || true){
     let screen_w = window.screen.width;
     let screen_h = window.screen.height;
@@ -66,9 +68,8 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
 
     let height_px_per_mm = height_px / height_mm;
     let width_px_per_mm  = width_px / width_mm;
-    let scale_lim = Math.floor(screen_h / height_px_per_mm / 10) * 10 - 10;
+    let scale_lim = Math.floor(window.innerHeight / height_px_per_mm / 10) * 10 - 10;
 
-    let ruler = document.getElementById("ruler");
     ruler.style.height = height_px_per_mm * (scale_lim + 10) + "px";
     ruler.style.width = 75 + "px";
 
@@ -86,3 +87,30 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
 }else{
     alert("iPhoneからアクセスしてください。")
 }
+
+
+let pos = {x:0,y:0};
+let angle = 0;
+
+interact(".over").draggable({
+    listeners:{
+        move(event){
+            pos.x += event.dx;
+            pos.y += event.dy;
+            ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + angle + "deg)";
+        }
+    }
+});
+
+interact(".over").gesturable({
+    listeners:{
+        move(event){
+            angle += event.da;
+            pos.x += event.dx;
+            pos.y += event.dy;
+            ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + angle + "deg)";
+        }
+    }
+})
+
+
