@@ -147,6 +147,9 @@ interact(".over").gesturable({
             pos.x += event.dx;
             pos.y += event.dy;
             ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
+        },
+        end(event){
+            angle = ang(angle)
         }
     }
 });
