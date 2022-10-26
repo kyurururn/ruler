@@ -3,6 +3,9 @@
     <head>
         <title>る～ら～　べ～た</title>
         <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="manifest" href="manifest.json">
+        <meta name="description" content="実寸大ものさし">
+        <link rel="shortcut icon" type="image/x-icon" href="る～ら～.png">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet"> 
     </head>
@@ -18,5 +21,17 @@
     </body>
     <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
     <script src="main.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register("./serviceWorker.js")
+                    .then(function (registration) {
+                        console.log("serviceWorker registed.");
+                    }).catch(function (error) {
+                        console.warn("serviceWorker error.", error);
+                    });
+            }
+        });
+    </script>
     	
 </html>

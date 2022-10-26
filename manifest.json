@@ -1,0 +1,17 @@
+{
+    "name": "る～ら～",
+    "short_name": "る～ら～",
+    "theme_color": "#2d2d2d",
+    "background_color": "#87ceeb",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
+    "icons":[
+        {
+            "src":"る～ら～.png",
+            "sizes":"512x512",
+            "type":"image/png"
+        }
+    ]
+}
