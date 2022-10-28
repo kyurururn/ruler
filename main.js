@@ -52,7 +52,7 @@ let ruler = document.getElementById("ruler");
 let ruler_height;
 let ruler_width;
 
-if(navigator.userAgent.indexOf("iPhone") > 0){
+if(navigator.userAgent.indexOf("iPhone") > 0 || true){
     let screen_w = window.screen.width;
     let screen_h = window.screen.height;
     let device = "";
