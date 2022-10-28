@@ -82,10 +82,6 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
     let height_px_per_mm = height_px / height_mm;
     let width_px_per_mm  = width_px / width_mm;
     let scale_lim = Math.floor(window.innerHeight / height_px_per_mm / 10) * 10 - 10;
-    if(window.screen.height == window.innerHeight){
-        scale_lim -= 10;
-        console.log("a")
-    }
 
     ruler_height = height_px_per_mm * (scale_lim + 10);
     ruler.style.height = height_px_per_mm * (scale_lim + 10) + "px";
