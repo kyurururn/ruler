@@ -52,7 +52,7 @@ let ruler = document.getElementById("ruler");
 let ruler_height;
 let ruler_width;
 
-if(navigator.userAgent.indexOf("iPhone") > 0 || true){
+if(navigator.userAgent.indexOf("iPhone") > 0){
     let screen_w = window.screen.width;
     let screen_h = window.screen.height;
     let device = "";
@@ -74,37 +74,38 @@ if(navigator.userAgent.indexOf("iPhone") > 0 || true){
 
     if(device == ""){
         alert("対応していない機種の可能性があります。")
-    }
+    }else{
 
-    let width_mm = mm * Math.cos(theta);
-    let height_mm = mm * Math.sin(theta);
+        let width_mm = mm * Math.cos(theta);
+        let height_mm = mm * Math.sin(theta);
 
-    let height_px_per_mm = height_px / height_mm;
-    let width_px_per_mm  = width_px / width_mm;
-    let scale_lim = Math.floor(window.innerHeight / height_px_per_mm / 10) * 10 - 10;
+        let height_px_per_mm = height_px / height_mm;
+        let width_px_per_mm  = width_px / width_mm;
+        let scale_lim = Math.floor(window.innerHeight / height_px_per_mm / 10) * 10 - 10;
 
-    ruler_height = height_px_per_mm * (scale_lim + 10);
-    ruler.style.height = height_px_per_mm * (scale_lim + 10) + "px";
-    ruler_width = 75;
-    ruler.style.width = 75 + "px";
+        ruler_height = height_px_per_mm * (scale_lim + 10);
+        ruler.style.height = height_px_per_mm * (scale_lim + 10) + "px";
+        ruler_width = 75;
+        ruler.style.width = 75 + "px";
 
-    for(let i = 0; i < scale_lim + 1; ++i){
-        let scale = document.createElement("div");
-        scale.setAttribute("id","scale");
-        if(i % 10 == 0){
-            scale.setAttribute("id","scale_over");
-
-            let num = document.createElement("div");
-            num.setAttribute("id","num");
-            num.setAttribute("style","top:" + (height_px_per_mm * i + height_px_per_mm * 5 - 9) + "px; left:45px");
-            num.innerHTML = String(scale_lim / 10 - i / 10);
-            ruler.appendChild(num);
-
-        }else{
+        for(let i = 0; i < scale_lim + 1; ++i){
+            let scale = document.createElement("div");
             scale.setAttribute("id","scale");
+            if(i % 10 == 0){
+                scale.setAttribute("id","scale_over");
+
+                let num = document.createElement("div");
+                num.setAttribute("id","num");
+                num.setAttribute("style","top:" + (height_px_per_mm * i + height_px_per_mm * 5 - 9) + "px; left:45px");
+                num.innerHTML = String(scale_lim / 10 - i / 10);
+                ruler.appendChild(num);
+
+            }else{
+                scale.setAttribute("id","scale");
+            }
+            scale.setAttribute("style","top:" + (height_px_per_mm * i + height_px_per_mm * 5) + "px");
+            ruler.appendChild(scale);
         }
-        scale.setAttribute("style","top:" + (height_px_per_mm * i + height_px_per_mm * 5) + "px");
-        ruler.appendChild(scale);
     }
 }else{
     alert("iPhoneからアクセスしてください。")
