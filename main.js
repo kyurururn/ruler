@@ -98,7 +98,8 @@ if(device == ""){
             num.setAttribute("style","top:" + (height_px_per_mm * i + height_px_per_mm * 5 - 9) + "px; left:45px");
             num.innerHTML = String(scale_lim / 10 - i / 10);
             ruler.appendChild(num);
-
+        }else if(i % 5 == 0){
+            scale.setAttribute("id","scale");
         }else{
             scale.setAttribute("id","scale");
         }
@@ -109,8 +110,8 @@ if(device == ""){
 
 
 
-let pos = {x:0,y:0};
-let angle = 0;
+let pos = {x:(window.innerHeight - ruler_height) / 2, y:0};
+let angle = 180;
 
 const ang = (b) => {
     let bb = b
@@ -118,21 +119,60 @@ const ang = (b) => {
         bb += Math.abs(Math.floor(bb / 360)) * 360;
     }
 
-    if(bb % 90 <= 5){
+    if(bb % 90 <= 10){
         return bb - bb % 90;
-    }else if(bb % 90 >= 85){
+    }else if(bb % 90 >= 80){
         return bb + 90 - (bb % 90);
     }else{
         return bb;
     }
 }
 
+const posx = (x) => {
+    let xx = x;
+    
+    if(-25 <= xx && xx <= 25 && ang(angle) % 360 == 0){
+        xx = 0;
+    }
+
+    if(-25 <= window.innerWidth - 75 - xx && window.innerWidth - 75 - pos.x <= 25 && (ang(angle) % 360 == 180 || ang(angle) % 360 == -180)){
+        xx = window.innerWidth - 75;
+    }
+    return xx;
+}
+
+const posy = (y) => {
+    let yy = y;
+
+    if(-25 <= window.innerHeight / 2 + pos.y - 75 / 2 - (window.innerHeight - ruler_height) / 2 && window.innerHeight / 2 + pos.y - 75 / 2 - (window.innerHeight - ruler_height) / 2 <= 25 && (ang(angle) % 360 == 90 || ang(angle) % 360 == -270)){
+        yy = -(window.innerHeight / 2 + - 75 / 2 - (window.innerHeight - ruler_height) / 2)
+    }
+
+    if(-25 <= window.innerHeight / 2 - pos.y - 75 / 2 + (window.innerHeight - ruler_height) / 2 && window.innerHeight / 2 - pos.y - 75 / 2 + (window.innerHeight - ruler_height) / 2 <= 25 && (ang(angle) % 360 == 270 || ang(angle) % 360 == -90)){
+        yy = (window.innerHeight / 2 + - 75 / 2 + (window.innerHeight - ruler_height) / 2) + 2
+    }
+
+    return yy;
+}
+
+
+
+
+
+
+
+
 interact(".over").draggable({
     listeners:{
         move(event){
             pos.x += event.dx;
             pos.y += event.dy;
-            ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
+            ruler.style.transform = "translate(" + posx(pos.x) + "px," + posy(pos.y) + "px) rotate(" + ang(angle) + "deg)";
+        },
+        end(event){
+            pos.x = posx(pos.x);
+            pos.y = posy(pos.y);
+            ruler.style.transform = "translate(" + posx(pos.x) + "px," + posy(pos.y) + "px) rotate(" + ang(angle) + "deg)";
         }
     }
 });
@@ -143,10 +183,13 @@ interact(".over").gesturable({
             angle += event.da;
             pos.x += event.dx;
             pos.y += event.dy;
-            ruler.style.transform = "translate(" + pos.x + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
+            ruler.style.transform = "translate(" + posx(pos.x) + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
         },
         end(event){
-            angle = ang(angle)
+            angle = ang(angle);
+            pos.x = posx(pos.x);
+            pos.y = posy(pos.y);
+            ruler.style.transform = "translate(" + posx(pos.x) + "px," + pos.y + "px) rotate(" + ang(angle) + "deg)";
         }
     }
 });
