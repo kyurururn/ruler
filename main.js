@@ -75,7 +75,6 @@ for(let key in iphone_wh){
 if(device == ""){
     alert("対応していない機種の可能性があります。")
 }else{
-
     let width_mm = mm * Math.cos(theta);
     let height_mm = mm * Math.sin(theta);
 
@@ -127,7 +126,6 @@ const ang = (b) => {
         return bb;
     }
 }
-
 
 interact(".over").draggable({
     listeners:{
